@@ -24,14 +24,17 @@ class Auth:
 
         Args:
             path (str): The path to check.
-            excluded_paths (List[str]): A list of paths that do not require authentication.
+            excluded_paths (List[str]): A list of paths that do not require
+            authentication.
 
         Returns:
-            bool: True if authentication is required, False if the path is in excluded_paths.
+            bool: True if authentication is required, False if the path is in
+            excluded_paths.
 
         - Returns True if `path` is None.
         - Returns True if `excluded_paths` is None or empty.
-        - The check is slash-tolerant, treating paths with and without a trailing slash as equivalent.
+        - The check is slash-tolerant, treating paths with and without a
+          trailing slash as equivalent.
         """
         if path is None:
             return True
@@ -49,7 +52,8 @@ class Auth:
             request (Flask request): The request object.
 
         Returns:
-            str: The value of the Authorization header if present, otherwise None.
+            str: The value of the Authorization header if present,
+                 otherwise None.
         """
         return None
 
