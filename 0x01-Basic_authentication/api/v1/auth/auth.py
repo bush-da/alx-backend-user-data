@@ -5,6 +5,7 @@ from typing import List, TypeVar
 
 
 class Auth:
+    """Class that define auth"""
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         Determines if authentication is required for a given path.
