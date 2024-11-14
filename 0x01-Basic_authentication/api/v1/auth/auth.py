@@ -10,6 +10,12 @@ class Auth:
         Currently, this always returns False, as `path` and `excluded_paths`
         will be used later for more specific behavior.
         """
+        if path is None:
+            return True
+
+        if excluded_paths is None or len(excluded_paths) == 0:
+            return True
+
         return False
 
     def authorization_header(self, request=None) -> str:
