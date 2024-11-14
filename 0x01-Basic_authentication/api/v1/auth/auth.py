@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Manage the API authentication"""
 from flask import request
+from collection import TypeVar, List
 
 
 class Auth():
@@ -12,6 +13,7 @@ class Auth():
     def authorization_header(self, request=None) -> str:
         """Authorization header"""
         return None
+
     def current_user(self, request=None) -> TypeVar('User'):
         """current user"""
         return None
