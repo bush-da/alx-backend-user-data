@@ -19,7 +19,7 @@ if getenv("AUTH_TYPE") == "basic_auth":
     """if auth type is basic auth then create instance"""
     auth = BasicAuth()
 else:
-    from api.av1.auth.auth import Auth
+    from api.v1.auth.auth import Auth
     """if auth type don't set or other type
     """
     auth = Auth()
