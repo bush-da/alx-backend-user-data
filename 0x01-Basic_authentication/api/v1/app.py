@@ -15,13 +15,13 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 
 if getenv("AUTH_TYPE") == "basic_auth":
-    """if auth type is basic auth then create instance"""
     from api.v1.auth.basic_auth import BasicAuth
+    """if auth type is basic auth then create instance"""
     auth = BasicAuth()
 else:
+    from api.av1.auth.auth import Auth
     """if auth type don't set or other type
     """
-    from api.av1.auth.auth import Auth
     auth = Auth()
 
 
