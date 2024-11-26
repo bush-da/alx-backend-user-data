@@ -3,6 +3,8 @@
 Basic auth module for the API
 """
 from flask import request
+from models.base import Base
+from models.user import User
 from typing import List, TypeVar
 from api.v1.auth.auth import Auth
 import base64
@@ -49,3 +51,31 @@ class BasicAuth(Auth):
 
         splited = short_version.split(':')
         return (splited[0], splited[1])
+
+    def user_object_from_credentials(self,
+                                     user_email: str,
+                                     user_pwd: str) -> TypeVar('User'):
+        """Get user from db or file then check the credentials of the
+        user email and password and return user object
+        """
+        if user_email is None or not isinstance(user_email, str):
+            return None
+        if user_pwd is None or not isinstance(user_pwd, str):
+            return None
+
+        user = User()
+        check_users_exist = user.count()
+        if check_users_exist == 0:
+            return None
+        user = user.search({"email": user_email})
+        #now user is a list of len 1 because .search method returns list
+        if user:
+            #get user object from user list
+            user = user[0]
+            check_pass = user.is_valid_password(user_pwd)
+            if not check_pass:
+                return None
+            return user
+        
+
+        
