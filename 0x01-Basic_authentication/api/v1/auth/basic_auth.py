@@ -76,3 +76,14 @@ class BasicAuth(Auth):
             if not check_pass:
                 return None
             return user
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """Method that overload the super class Auth that get together
+        all the pieces for Basic Authentication of API
+        """
+        header = self.authorization_header(request)
+        base64_content = self.extract_base64_authorization_header(header)
+        decoded_conte = self.decode_base64_authorization_header(base64_content)
+        username, password = self.extract_user_credentials(decoded_conte)
+        user = self.user_object_from_credentials(username, password)
+        return user
