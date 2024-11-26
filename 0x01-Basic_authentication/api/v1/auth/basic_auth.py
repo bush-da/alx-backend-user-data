@@ -11,3 +11,12 @@ class BasicAuth(Auth):
     """
     Basic Authentication that inherit base Auth class
     """
+    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+        """method that extract base64 encoded content from authorization header
+        """
+        if authorization_header == None or type(authorization_header) != str:
+            return None
+        checker = authorization_header.split(' ')
+        if checker[0] != "Basic":
+            return None
+        return checker[1]
