@@ -68,14 +68,11 @@ class BasicAuth(Auth):
         if check_users_exist == 0:
             return None
         user = user.search({"email": user_email})
-        #now user is a list of len 1 because .search method returns list
+        # now user is a list of len 1 because .search method returns list
         if user:
-            #get user object from user list
+            # get user object from user list
             user = user[0]
             check_pass = user.is_valid_password(user_pwd)
             if not check_pass:
                 return None
             return user
-        
-
-        
