@@ -49,8 +49,8 @@ class BasicAuth(Auth):
         if ":" not in short_version:
             return (None, None)
 
-        splited = short_version.split(':')
-        return (splited[0], splited[1])
+        username, password = short_version.split(':', 1)
+        return (username, password)
 
     def user_object_from_credentials(self,
                                      user_email: str,
