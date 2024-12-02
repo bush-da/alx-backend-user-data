@@ -18,6 +18,10 @@ if getenv("AUTH_TYPE") == "basic_auth":
     from api.v1.auth.basic_auth import BasicAuth
     """if auth type is basic auth then create instance"""
     auth = BasicAuth()
+elif getenv("AUTH_TYPE") == "session_auth":
+    from api.v1.auth.session_auth import SessionAuth
+    """change to session based auth based on the env"""
+    auth = SessionAuth()
 else:
     from api.v1.auth.auth import Auth
     """if auth type don't set or other type
