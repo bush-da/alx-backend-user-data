@@ -7,6 +7,7 @@ paths, retrieve authorization headers, and determine the current user.
 
 from flask import request
 from typing import List, TypeVar
+import os
 
 
 class Auth:
@@ -79,3 +80,18 @@ p
             TypeVar('User'): The current user, if any. Currently returns None.
         """
         return None
+
+    def session_cookie(self, request=None):
+        """instance method that returns a cookie value from a request"""
+        if request is None:
+            return None
+
+        session_name = os.getenv("SESSION_NAME", "_my_session_id")
+        return request.cookies.get(session_name)
+
+
+
+
+
+
+
