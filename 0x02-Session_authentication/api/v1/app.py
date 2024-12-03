@@ -35,15 +35,16 @@ def before_request():
     if auth is None:
         return
 
-    paths = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/', '/api/v1/auth_session/login/']
+    paths = [
+        '/api/v1/status/', '/api/v1/unauthorized/',
+        '/api/v1/forbidden/', '/api/v1/auth_session/login/']
 
     if auth.require_auth(request.path, paths):
         """check if the request requre auth or not"""
-        if auth.authorization_header(request) is None:
+        if auth.authorization_header(request) is None and auth.session_cookie(
+                request) is None:
             """check request header if there is auth if not
             return unauthorized"""
-            abort(401)
-        if auth.session_cookie(request) is None:
             abort(401)
 
         if auth.current_user(request) is None:
