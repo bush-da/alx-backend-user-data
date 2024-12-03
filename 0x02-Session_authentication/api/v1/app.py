@@ -42,9 +42,9 @@ def before_request():
         if auth.authorization_header(request) is None:
             """check request header if there is auth if not
             return unauthorized"""
-            None, abort(403)
-        if auth.session_cookie(request):
-            None, abort(401)
+            abort(401)
+        if auth.session_cookie(request) is None:
+            abort(401)
 
         if auth.current_user(request) is None:
             """if user not exist on authorized list return forbidden"""
