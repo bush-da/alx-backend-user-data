@@ -33,6 +33,6 @@ def session_auth() -> str:
         the session id and response to user in form of cookie
         """
         session_name = os.getenv("SESSION_NAME", "_my_session_id")
-        res = jsonify(state=0, msg='success')
+        res = jsonify(user.to_json())
         res.set_cookie(session_name, session_id)
-        return res, user.to_json()
+        return res
